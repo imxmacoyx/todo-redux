@@ -1,8 +1,10 @@
 <header class="header">
     <h1>Actividades</h1>
-    <input class="new-todo"
-    [formControl]="textoInputControl"
-    placeholder="¿Qué necesitas hacer?" 
-    (keyup.enter)="agregar()"
-    autofocus>
+    <form (submit)="agregar($event)">
+        <input class="new-todo"
+               [formControl]="textoInputControl"
+               placeholder="¿Qué necesitas hacer?"
+               autofocus>
+        <button type="submit" style="display: none;"></button>
+    </form>
 </header>

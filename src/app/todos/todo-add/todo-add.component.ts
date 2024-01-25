@@ -7,23 +7,37 @@ import { AppState } from '../../app.reducer';
 @Component({
   selector: 'app-todo-add',
   templateUrl: './todo-add.component.html',
-  styleUrl: './todo-add.component.scss'
+  styleUrl: './todo-add.component.scss',
 })
 export class TodoAddComponent {
-
   textoInputControl!: FormControl;
 
-  constructor(private readonly store: Store<AppState>){
+  constructor(private readonly store: Store<AppState>) {
     this.textoInputControl = new FormControl('', [Validators.required]);
+
+    this.textoInputControl.valueChanges.subscribe((value) => {
+      if (value && value.includes('\n')) {
+        this.agregarTodo(value.replace('\n', ''));
+      }
+    });
   }
 
-  agregar(){
+  agregar(event: Event) {
+    if (event) {
+      event.preventDefault();
+    }
 
     if (this.textoInputControl.invalid) return;
 
-    this.store.dispatch(crear({texto: this.textoInputControl.value }));
+    this.store.dispatch(crear({ texto: this.textoInputControl.value }));
 
     this.textoInputControl.reset();
   }
-  
+
+  private agregarTodo(value: string) {
+    if (!value || !value.trim()) return;
+
+    this.store.dispatch(crear({ texto: value.trim() }));
+    this.textoInputControl.reset();
+  }
 }
