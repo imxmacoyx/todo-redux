@@ -1,0 +1,11 @@
+<footer class="footer">
+    <span class="todo-count"><strong>{{pendientes}}</strong> tareas pendientes</span>
+    <ul class="filters">
+      @for (filtro of filtros; track $index) {
+        <li (click)="setFiltro(filtro)">
+          <a [class.selected]="filtro === filtroActual">{{filtro | titlecase}}</a>
+        </li>
+      }
+    </ul>
+    <button (click)="borrarCompletados()" class="clear-completed">Limpiar completadas</button>
+  </footer>

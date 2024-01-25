@@ -1,0 +1,7 @@
+    <ul class="todo-list">
+        @if ((todos$ | async)  ; as todos) {
+            @for (todo of todos | filtroTodo:filtroActual ; track todo.id) {
+                <app-todo-item [todo]="todo" />
+            }
+        }
+    </ul>
