@@ -29,9 +29,7 @@ export class TodoAddComponent {
 
     if (this.textoInputControl.invalid) return;
 
-    this.store.dispatch(crear({ texto: this.textoInputControl.value }));
-
-    this.textoInputControl.reset();
+    this.agregarTodo(this.textoInputControl.value);
   }
 
   private agregarTodo(value: string) {
